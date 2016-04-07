@@ -1,0 +1,31 @@
+version: "2"
+
+services:
+  site-m:
+    # user_docker_hub if your dockerhub user
+    image: "user_docker_hub/pnlug:0.1"
+    container_name: master_php
+    environment:
+      - MY_NAME="The Master PROD!"
+
+
+  site-s:
+    # user_docker_hub if your dockerhub user
+    image: "user_docker_hub/pnlug:0.1"
+    container_name: slave_php
+    depends_on:
+      - site-m
+    environment:
+      - MY_NAME="a slave.."PROD!"
+    
+  balancer:
+    image: "site_balancer:0.1"
+    container_name: entry
+    build:
+      context: .
+      dockerfile: Dockerfile-Nginx
+    links:
+      - site-m:master
+      - site-s:slave
+    ports:
+      - 80:80

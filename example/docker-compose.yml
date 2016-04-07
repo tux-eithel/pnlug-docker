@@ -1,0 +1,37 @@
+version: "2"
+
+services:
+  site-m:
+    image: "site:v0.1"
+    container_name: master_php
+    build:
+      context: .
+      dockerfile: Dockerfile-PHP
+    environment:
+      - MY_NAME="The Master"
+    #ports:
+    #  - 8080:80
+
+  site-s:
+    image: "site:v0.1"
+    container_name: slave_php
+    depends_on:
+      - site-m
+    environment:
+      - MY_NAME="a slave.."
+    #ports:
+    #  - 8081:80
+    
+  balancer:
+    image: "site_balancer:v0.1"
+    container_name: entry
+    build:
+      context: .
+      dockerfile: Dockerfile-Nginx
+    links:
+      # we use this name inside nginx conf
+      # check nginx.conf rows 31-32
+      - site-m:master
+      - site-s:slave
+    ports:
+      - 80:80
