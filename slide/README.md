@@ -1,2 +1,2 @@
 ## slide
-open index.html using your browser, and navigate using the keyboard
+Open index.html using your browser, and navigate using the keyboard
