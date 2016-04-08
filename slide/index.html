@@ -96,7 +96,7 @@
 								<pre><code>ls /etc/hosts</code></pre>
 							</li>
 							<li>
-								Use a specific ubuntu version (if not locally present, it'll be downloaded)
+								Use a specific debian version (if not locally present, it'll be downloaded)
 								<pre><code>debian:jessie</code></pre>
 							</li>
 							<li>
@@ -118,7 +118,7 @@
 				<section>
 					<h2>More options, more fun!</h2>
 					<p>
-						<pre><code>docker run -t -i ubuntu:14.04 /bin/bash</code></pre>
+						<pre><code>docker run -t -i debian:jessie /bin/bash</code></pre>
 						<ul>
 							<li>-t : pseudo-tty or terminal inside container</li>
 							<li>-i : use <i>STDIN</i> for inteact with container</li>
@@ -242,7 +242,7 @@ $ docker build -t="myuser/myapp:v1" .
 							<pre><code>
 # random instructions!!
 
-FROM ubuntu:trusty
+FROM debian:jessie
 MAINTAINER Cris
 
 # Install packages
